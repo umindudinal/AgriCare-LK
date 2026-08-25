@@ -1,8 +1,4 @@
-<div align="center">
-
-<img src="docs/images/logo.png" alt="AgriCare LK logo" width="140" />
-
-# 🌿 AgriCare LK
+🌿 AgriCare LK
 
 **AI-powered plant disease diagnosis for Sri Lankan farmers — in Sinhala.**
 
