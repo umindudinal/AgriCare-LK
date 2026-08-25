@@ -1,4 +1,9 @@
-🌿 AgriCare LK
+<div align="center">
+
+
+
+
+# 🌿 AgriCare LK
 
 **AI-powered plant disease diagnosis for Sri Lankan farmers — in Sinhala.**
 
