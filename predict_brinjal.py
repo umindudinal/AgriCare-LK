@@ -2,7 +2,6 @@ import sys
 import os
 import json
 
-# TensorFlow වලින් එන අනවශ්‍ය Warnings පෙන්නන එක නවත්වන්න
 os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3' 
 
 import tensorflow as tf
@@ -24,7 +23,6 @@ try:
 
     model = tf.keras.models.load_model(model_path)
 
-    # Brinjal_Dataset ෆෝල්ඩරයේ අකාරාදී පිළිවෙලට අනුව class names
     class_names = [
         'Brinjal_fruit_cracking',
         'Brinjal_healthy_fruit',

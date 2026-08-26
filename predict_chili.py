@@ -5,16 +5,13 @@ import tensorflow as tf
 from tensorflow.keras.preprocessing import image
 import json
 
-# සිංහල/Unicode අකුරු Terminal එකේ පෙන්වීමට
 if hasattr(sys.stdout, 'reconfigure'):
     sys.stdout.reconfigure(encoding='utf-8')
 
 try:
-    # 1. මිරිස් AI Model එක Load කිරීම
     model_path = os.path.join(os.path.dirname(__file__), 'chili_disease_model.keras')
     model = tf.keras.models.load_model(model_path)
 
-    # 2. රෝග වල නම් (Training එකේ ආපු පිළිවෙළටම - 7 Classes)
     class_names = [
         'Chili__healthy',
         'Chili__leaf curl',
@@ -25,21 +22,17 @@ try:
         'Chili_fruit_rot'
     ]
 
-    # 3. ඡායාරූපය ලබාගැනීම (Node.js එකෙන් එවන)
     img_path = sys.argv[1]
     
-    # 4. ඡායාරූපය Model එකට ගැලපෙන විදිහට සකස් කිරීම
     img = image.load_img(img_path, target_size=(224, 224))
     img_array = image.img_to_array(img)
     img_array = np.expand_dims(img_array, axis=0) / 255.0
 
-    # 5. රෝගය අනුමාන කිරීම
     predictions = model.predict(img_array, verbose=0)
     predicted_class_index = np.argmax(predictions[0])
     predicted_class_name = class_names[predicted_class_index]
     confidence = float(np.max(predictions[0]))
 
-    # 6. ප්‍රතිඵලය JSON විදිහට Node.js එකට යැවීම
     result = {
         "predicted_class": predicted_class_name,
         "confidence": confidence

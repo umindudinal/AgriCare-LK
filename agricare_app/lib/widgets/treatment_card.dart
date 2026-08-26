@@ -16,10 +16,16 @@ class TreatmentCard extends StatelessWidget {
   Widget build(BuildContext context) {
     final bool isOrganic = type.toLowerCase() == 'organic';
 
-    final Color primaryColor = isOrganic ? const Color(0xFF2E7D32) : const Color(0xFFD84315);
-    final Color badgeBg = isOrganic ? const Color(0xFFE8F5E9) : const Color(0xFFFBE9E7);
+    final Color primaryColor = isOrganic
+        ? const Color(0xFF2E7D32)
+        : const Color(0xFFD84315);
+    final Color badgeBg = isOrganic
+        ? const Color(0xFFE8F5E9)
+        : const Color(0xFFFBE9E7);
     final IconData icon = isOrganic ? Icons.eco_rounded : Icons.science_rounded;
-    final String typeLabel = isOrganic ? 'කාබනික විසඳුම (Organic)' : 'රසායනික විසඳුම (Chemical)';
+    final String typeLabel = isOrganic
+        ? 'කාබනික විසඳුම (Organic)'
+        : 'රසායනික විසඳුම (Chemical)';
 
     return Container(
       margin: const EdgeInsets.only(bottom: 16),
@@ -44,7 +50,6 @@ class TreatmentCard extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            // Header Bar with Badge
             Container(
               padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
               decoration: BoxDecoration(
@@ -78,10 +83,16 @@ class TreatmentCard extends StatelessWidget {
                     ),
                   ),
                   Container(
-                    padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 5),
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 12,
+                      vertical: 5,
+                    ),
                     decoration: BoxDecoration(
                       gradient: LinearGradient(
-                        colors: [primaryColor, primaryColor.withValues(alpha: 0.85)],
+                        colors: [
+                          primaryColor,
+                          primaryColor.withValues(alpha: 0.85),
+                        ],
                       ),
                       borderRadius: BorderRadius.circular(20),
                       boxShadow: [
@@ -105,7 +116,6 @@ class TreatmentCard extends StatelessWidget {
               ),
             ),
 
-            // Content Body
             Padding(
               padding: const EdgeInsets.all(18.0),
               child: Row(

@@ -1,11 +1,9 @@
 import pyodbc
 
-# ඔයා ලබාදුන්න Server සහ Database විස්තර
 server = r'UMINDU-ACER\SQLEXPRESS'
 database = 'AgriCareLK_DB'
 
 try:
-    # Windows Authentication හරහා SQL Server එකට සම්බන්ධ වීම
     conn_str = f'DRIVER={{ODBC Driver 17 for SQL Server}};SERVER={server};DATABASE={database};Trusted_Connection=yes;'
     print("Database එකට සම්බන්ධ වෙමින් පවතී...")
     
@@ -13,7 +11,6 @@ try:
     cursor = conn.cursor()
     print("✅ Database එකට සාර්ථකව සම්බන්ධ විය!\n")
 
-    # රෝග සහ ප්‍රතිකාර එකට සම්බන්ධ කරලා දත්ත ලබාගැනීමේ SQL Query එක
     query = """
     SELECT d.CommonName_EN, d.CommonName_SI, d.Symptoms_SI, t.TreatmentType, t.Instruction_SI
     FROM Diseases d

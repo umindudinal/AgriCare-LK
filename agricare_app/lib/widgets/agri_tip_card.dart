@@ -22,7 +22,10 @@ class AgriTipCard extends StatelessWidget {
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(22),
-        border: Border.all(color: accentColor.withValues(alpha: 0.22), width: 1.5),
+        border: Border.all(
+          color: accentColor.withValues(alpha: 0.22),
+          width: 1.5,
+        ),
         boxShadow: [
           BoxShadow(
             color: accentColor.withValues(alpha: 0.08),
@@ -37,7 +40,6 @@ class AgriTipCard extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            // Top Accent Bar
             Container(
               height: 4,
               width: double.infinity,
@@ -79,7 +81,10 @@ class AgriTipCard extends StatelessWidget {
                             ),
                             const SizedBox(height: 2),
                             Container(
-                              padding: const EdgeInsets.symmetric(horizontal: 7, vertical: 2),
+                              padding: const EdgeInsets.symmetric(
+                                horizontal: 7,
+                                vertical: 2,
+                              ),
                               decoration: BoxDecoration(
                                 color: accentColor.withValues(alpha: 0.1),
                                 borderRadius: BorderRadius.circular(6),

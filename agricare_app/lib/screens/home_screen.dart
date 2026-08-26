@@ -19,7 +19,6 @@ class _HomeScreenState extends State<HomeScreen> {
   final ImagePicker _picker = ImagePicker();
   bool _isLoading = false;
 
-  // Selected crop: 'tomato', 'chili', or 'brinjal'
   String _selectedPlant = 'tomato';
 
   Future<void> _pickImage(ImageSource source) async {
@@ -35,8 +34,10 @@ class _HomeScreenState extends State<HomeScreen> {
           _isLoading = true;
         });
 
-        // Send image & selected crop type to API
-        final result = await ApiService.analyzePlant(_selectedImage!, _selectedPlant);
+        final result = await ApiService.analyzePlant(
+          _selectedImage!,
+          _selectedPlant,
+        );
 
         if (!mounted) return;
 
@@ -45,14 +46,11 @@ class _HomeScreenState extends State<HomeScreen> {
         });
 
         if (result != null) {
-          // Navigate to ResultScreen
           Navigator.push(
             context,
             MaterialPageRoute(
-              builder: (context) => ResultScreen(
-                image: _selectedImage!,
-                resultData: result,
-              ),
+              builder: (context) =>
+                  ResultScreen(image: _selectedImage!, resultData: result),
             ),
           );
         } else {
@@ -63,13 +61,17 @@ class _HomeScreenState extends State<HomeScreen> {
                   Icon(Icons.error_outline_rounded, color: Colors.white),
                   SizedBox(width: 10),
                   Expanded(
-                    child: Text('❌ සේවාදායකය (Backend API) සමඟ සම්බන්ධ වීමේ දෝෂයක්.'),
+                    child: Text(
+                      '❌ සේවාදායකය (Backend API) සමඟ සම්බන්ධ වීමේ දෝෂයක්.',
+                    ),
                   ),
                 ],
               ),
               backgroundColor: Colors.red.shade700,
               behavior: SnackBarBehavior.floating,
-              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(14)),
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(14),
+              ),
             ),
           );
         }
@@ -84,7 +86,9 @@ class _HomeScreenState extends State<HomeScreen> {
           content: Text('ඡායාරූපය ලබාගැනීමේදී දෝෂයක්: $e'),
           backgroundColor: Colors.red.shade700,
           behavior: SnackBarBehavior.floating,
-          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(14)),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(14),
+          ),
         ),
       );
     }
@@ -112,8 +116,12 @@ class _HomeScreenState extends State<HomeScreen> {
     final List<Color> bannerGradient = isChili
         ? const [Color(0xFFBF360C), Color(0xFFD84315), Color(0xFFE65100)]
         : (isBrinjal
-            ? const [Color(0xFF4A148C), Color(0xFF6A1B9A), Color(0xFF8E24AA)]
-            : const [Color(0xFF0F5A29), Color(0xFF2E7D32), Color(0xFF388E3C)]);
+              ? const [Color(0xFF4A148C), Color(0xFF6A1B9A), Color(0xFF8E24AA)]
+              : const [
+                  Color(0xFF0F5A29),
+                  Color(0xFF2E7D32),
+                  Color(0xFF388E3C),
+                ]);
 
     final String partnerBadgeText = isChili
         ? 'මිරිස් වගා සහකරු'
@@ -136,14 +144,14 @@ class _HomeScreenState extends State<HomeScreen> {
     final String addPhotoPromptText = isChili
         ? 'මිරිස් ගසක ඡායාරූපයක් එක් කරන්න'
         : (isBrinjal
-            ? 'වම්බටු ගසේ ඡායාරූපයක් එක් කරන්න'
-            : 'තක්කාලි ගසේ ඡායාරූපයක් එක් කරන්න');
+              ? 'වම්බටු ගසේ ඡායාරූපයක් එක් කරන්න'
+              : 'තක්කාලි ගසේ ඡායාරූපයක් එක් කරන්න');
 
     final List<Color> cameraButtonGradient = isChili
         ? const [Color(0xFFD84315), Color(0xFFE65100)]
         : (isBrinjal
-            ? const [Color(0xFF6A1B9A), Color(0xFF8E24AA)]
-            : const [Color(0xFF0F5A29), Color(0xFF2E7D32)]);
+              ? const [Color(0xFF6A1B9A), Color(0xFF8E24AA)]
+              : const [Color(0xFF0F5A29), Color(0xFF2E7D32)]);
 
     return Scaffold(
       backgroundColor: const Color(0xFFF3F7F3),
@@ -157,7 +165,11 @@ class _HomeScreenState extends State<HomeScreen> {
                 color: Colors.white.withValues(alpha: 0.25),
                 shape: BoxShape.circle,
               ),
-              child: const Icon(Icons.eco_rounded, color: Colors.white, size: 22),
+              child: const Icon(
+                Icons.eco_rounded,
+                color: Colors.white,
+                size: 22,
+              ),
             ),
             const SizedBox(width: 10),
             const Text(
@@ -177,7 +189,11 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
               child: const Text(
                 'AI PRO 2.0',
-                style: TextStyle(fontSize: 10.5, fontWeight: FontWeight.bold, letterSpacing: 0.5),
+                style: TextStyle(
+                  fontSize: 10.5,
+                  fontWeight: FontWeight.bold,
+                  letterSpacing: 0.5,
+                ),
               ),
             ),
           ],
@@ -202,11 +218,13 @@ class _HomeScreenState extends State<HomeScreen> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              // 1. Futuristic Hero Welcome Banner Card (Compact)
               AnimatedContainer(
                 duration: const Duration(milliseconds: 350),
                 width: double.infinity,
-                padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 16,
+                  vertical: 14,
+                ),
                 decoration: BoxDecoration(
                   gradient: LinearGradient(
                     colors: bannerGradient,
@@ -231,7 +249,10 @@ class _HomeScreenState extends State<HomeScreen> {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Container(
-                                padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
+                                padding: const EdgeInsets.symmetric(
+                                  horizontal: 8,
+                                  vertical: 3,
+                                ),
                                 decoration: BoxDecoration(
                                   color: Colors.white.withValues(alpha: 0.25),
                                   borderRadius: BorderRadius.circular(12),
@@ -239,7 +260,10 @@ class _HomeScreenState extends State<HomeScreen> {
                                 child: Row(
                                   mainAxisSize: MainAxisSize.min,
                                   children: [
-                                    Text(cropEmoji, style: const TextStyle(fontSize: 12)),
+                                    Text(
+                                      cropEmoji,
+                                      style: const TextStyle(fontSize: 12),
+                                    ),
                                     const SizedBox(width: 4),
                                     Flexible(
                                       child: Text(
@@ -278,7 +302,6 @@ class _HomeScreenState extends State<HomeScreen> {
                           ),
                         ),
                         const SizedBox(width: 10),
-                        // Circular Glowing Crop Badge (Compact)
                         AnimatedContainer(
                           duration: const Duration(milliseconds: 350),
                           padding: const EdgeInsets.all(10),
@@ -301,9 +324,11 @@ class _HomeScreenState extends State<HomeScreen> {
                       ],
                     ),
                     const SizedBox(height: 10),
-                    // Quick Stats Bar in Hero Banner (Compact)
                     Container(
-                      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 10,
+                        vertical: 5,
+                      ),
                       decoration: BoxDecoration(
                         color: Colors.black.withValues(alpha: 0.15),
                         borderRadius: BorderRadius.circular(12),
@@ -312,9 +337,17 @@ class _HomeScreenState extends State<HomeScreen> {
                         mainAxisAlignment: MainAxisAlignment.spaceAround,
                         children: [
                           _buildHeaderStat('⚡ 2Sec AI', 'විශ්ලේෂණය'),
-                          Container(width: 1, height: 16, color: Colors.white24),
+                          Container(
+                            width: 1,
+                            height: 16,
+                            color: Colors.white24,
+                          ),
                           _buildHeaderStat('🇱🇰 100%', 'සිංහලෙන්ම'),
-                          Container(width: 1, height: 16, color: Colors.white24),
+                          Container(
+                            width: 1,
+                            height: 16,
+                            color: Colors.white24,
+                          ),
                           _buildHeaderStat('🛡️ 99%', 'නිරවද්‍යතාව'),
                         ],
                       ),
@@ -325,7 +358,6 @@ class _HomeScreenState extends State<HomeScreen> {
 
               const SizedBox(height: 16),
 
-              // 2. Interactive Crop/Vegetable Selection Dropdown
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -342,7 +374,10 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
                   const SizedBox(width: 8),
                   Container(
-                    padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 10,
+                      vertical: 4,
+                    ),
                     decoration: BoxDecoration(
                       color: plantThemeColor.withValues(alpha: 0.12),
                       borderRadius: BorderRadius.circular(12),
@@ -360,17 +395,16 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
               const SizedBox(height: 10),
 
-              // Custom Styled Vegetable Dropdown
               Container(
                 width: double.infinity,
-                padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 4),
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 16,
+                  vertical: 4,
+                ),
                 decoration: BoxDecoration(
                   color: Colors.white,
                   borderRadius: BorderRadius.circular(20),
-                  border: Border.all(
-                    color: plantThemeColor,
-                    width: 2.0,
-                  ),
+                  border: Border.all(color: plantThemeColor, width: 2.0),
                   boxShadow: [
                     BoxShadow(
                       color: plantThemeColor.withValues(alpha: 0.15),
@@ -383,7 +417,11 @@ class _HomeScreenState extends State<HomeScreen> {
                   child: DropdownButton<String>(
                     value: _selectedPlant,
                     isExpanded: true,
-                    icon: Icon(Icons.keyboard_arrow_down_rounded, color: plantThemeColor, size: 28),
+                    icon: Icon(
+                      Icons.keyboard_arrow_down_rounded,
+                      color: plantThemeColor,
+                      size: 28,
+                    ),
                     dropdownColor: Colors.white,
                     borderRadius: BorderRadius.circular(18),
                     onChanged: (String? newValue) {
@@ -408,11 +446,17 @@ class _HomeScreenState extends State<HomeScreen> {
                                 children: [
                                   const Text(
                                     'තක්කාලි (Tomato)',
-                                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
+                                    style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 15,
+                                    ),
                                   ),
                                   Text(
                                     'රෝග කාණ්ඩ 10ක්',
-                                    style: TextStyle(fontSize: 11.5, color: Colors.grey.shade600),
+                                    style: TextStyle(
+                                      fontSize: 11.5,
+                                      color: Colors.grey.shade600,
+                                    ),
                                   ),
                                 ],
                               ),
@@ -433,11 +477,17 @@ class _HomeScreenState extends State<HomeScreen> {
                                 children: [
                                   const Text(
                                     'මිරිස් (Chili)',
-                                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
+                                    style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 15,
+                                    ),
                                   ),
                                   Text(
                                     'රෝග කාණ්ඩ 7ක්',
-                                    style: TextStyle(fontSize: 11.5, color: Colors.grey.shade600),
+                                    style: TextStyle(
+                                      fontSize: 11.5,
+                                      color: Colors.grey.shade600,
+                                    ),
                                   ),
                                 ],
                               ),
@@ -458,11 +508,17 @@ class _HomeScreenState extends State<HomeScreen> {
                                 children: [
                                   const Text(
                                     'වම්බටු (Brinjal)',
-                                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
+                                    style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 15,
+                                    ),
                                   ),
                                   Text(
                                     'රෝග කාණ්ඩ 5ක්',
-                                    style: TextStyle(fontSize: 11.5, color: Colors.grey.shade600),
+                                    style: TextStyle(
+                                      fontSize: 11.5,
+                                      color: Colors.grey.shade600,
+                                    ),
                                   ),
                                 ],
                               ),
@@ -477,7 +533,6 @@ class _HomeScreenState extends State<HomeScreen> {
 
               const SizedBox(height: 20),
 
-              // 3. AI Camera Viewfinder Scan Box Header
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -506,7 +561,6 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
               const SizedBox(height: 12),
 
-              // AI Viewfinder Scanner Box
               AnimatedContainer(
                 duration: const Duration(milliseconds: 300),
                 height: 310,
@@ -540,11 +594,13 @@ class _HomeScreenState extends State<HomeScreen> {
                           height: double.infinity,
                           fit: BoxFit.cover,
                         ),
-                        // Loading AI Overlay
                         if (_isLoading)
                           Container(
                             color: Colors.black.withValues(alpha: 0.75),
-                            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: 20,
+                              vertical: 16,
+                            ),
                             child: const Center(
                               child: Column(
                                 mainAxisAlignment: MainAxisAlignment.center,
@@ -553,7 +609,9 @@ class _HomeScreenState extends State<HomeScreen> {
                                     width: 50,
                                     height: 50,
                                     child: CircularProgressIndicator(
-                                      valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
+                                      valueColor: AlwaysStoppedAnimation<Color>(
+                                        Colors.white,
+                                      ),
                                       strokeWidth: 4,
                                     ),
                                   ),
@@ -582,21 +640,23 @@ class _HomeScreenState extends State<HomeScreen> {
                             ),
                           ),
                       ] else ...[
-                        // Empty Camera Viewfinder Target Layout
                         Container(
                           padding: const EdgeInsets.all(24),
                           width: double.infinity,
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              // Viewfinder Circle Badge
                               Container(
                                 padding: const EdgeInsets.all(22),
                                 decoration: BoxDecoration(
-                                  color: plantThemeColor.withValues(alpha: 0.12),
+                                  color: plantThemeColor.withValues(
+                                    alpha: 0.12,
+                                  ),
                                   shape: BoxShape.circle,
                                   border: Border.all(
-                                    color: plantThemeColor.withValues(alpha: 0.3),
+                                    color: plantThemeColor.withValues(
+                                      alpha: 0.3,
+                                    ),
                                     width: 1.5,
                                   ),
                                 ),
@@ -637,7 +697,6 @@ class _HomeScreenState extends State<HomeScreen> {
 
               const SizedBox(height: 24),
 
-              // 4. Action Buttons (Camera & Gallery)
               if (!_isLoading) ...[
                 Row(
                   children: [
@@ -656,7 +715,10 @@ class _HomeScreenState extends State<HomeScreen> {
                         label: 'ගැලරිය',
                         icon: Icons.photo_library_rounded,
                         onPressed: () => _pickImage(ImageSource.gallery),
-                        gradientColors: const [Color(0xFF0288D1), Color(0xFF0277BD)],
+                        gradientColors: const [
+                          Color(0xFF0288D1),
+                          Color(0xFF0277BD),
+                        ],
                       ),
                     ),
                   ],
@@ -665,7 +727,6 @@ class _HomeScreenState extends State<HomeScreen> {
 
               const SizedBox(height: 32),
 
-              // 5. Feature Highlights Row (Interactive)
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
@@ -688,7 +749,9 @@ class _HomeScreenState extends State<HomeScreen> {
                     onTap: () {
                       Navigator.push(
                         context,
-                        MaterialPageRoute(builder: (context) => const InfoScreen()),
+                        MaterialPageRoute(
+                          builder: (context) => const InfoScreen(),
+                        ),
                       );
                     },
                   ),
@@ -697,7 +760,6 @@ class _HomeScreenState extends State<HomeScreen> {
 
               const SizedBox(height: 32),
 
-              // 6. Agricultural Advice Showcase (ගොවි දැනුම)
               Text(
                 'ගොවි දැනුම සහ උපදෙස්',
                 style: TextStyle(
@@ -717,26 +779,32 @@ class _HomeScreenState extends State<HomeScreen> {
                     AgriTipCard(
                       title: isChili
                           ? 'මිරිස් කොළ කොඩවීම'
-                          : (isBrinjal ? 'වම්බටු පණුවන් පාලනය' : 'තක්කාලි වගාව'),
+                          : (isBrinjal
+                                ? 'වම්බටු පණුවන් පාලනය'
+                                : 'තක්කාලි වගාව'),
                       description: isChili
                           ? 'මිරිස් වගාවේ කොළ කොඩවීම (Leaf Curl) සඳහා සුදුමැස්සන් පාලනය කරන්න.'
                           : (isBrinjal
-                              ? 'වම්බටු දළු සහ කරල් විදින පණුවා පාලනයට ෆෙරමෝන් උගුල් භාවිත කරන්න.'
-                              : 'පත්‍ර කහ වීම සහ Curly වීම වැළැක්වීමට කාබනික සාරය භාවිත කරන්න.'),
+                                ? 'වම්බටු දළු සහ කරල් විදින පණුවා පාලනයට ෆෙරමෝන් උගුල් භාවිත කරන්න.'
+                                : 'පත්‍ර කහ වීම සහ Curly වීම වැළැක්වීමට කාබනික සාරය භාවිත කරන්න.'),
                       icon: isChili
                           ? Icons.local_fire_department_rounded
-                          : (isBrinjal ? Icons.spa_rounded : Icons.local_florist_rounded),
+                          : (isBrinjal
+                                ? Icons.spa_rounded
+                                : Icons.local_florist_rounded),
                       accentColor: plantThemeColor,
                     ),
                     const AgriTipCard(
                       title: 'නිවැරදි ඡායාරූප',
-                      description: 'පත්‍රයේ/ගෙඩියේ රෝගී ස්ථානය හොඳින් ආලෝකය ඇති විට ඡායාරූපගත කරන්න.',
+                      description:
+                          'පත්‍රයේ/ගෙඩියේ රෝගී ස්ථානය හොඳින් ආලෝකය ඇති විට ඡායාරූපගත කරන්න.',
                       icon: Icons.camera_rounded,
                       accentColor: Color(0xFF0288D1),
                     ),
                     const AgriTipCard(
                       title: 'කාබනික පලිබෝධ පාලනය',
-                      description: 'කොහොඹ ඇට සාරය සහ බෝඩෝ මිශ්‍රණය භාවිතයෙන් රෝග කාරක දිලීර පාලනය කල හැක.',
+                      description:
+                          'කොහොඹ ඇට සාරය සහ බෝඩෝ මිශ්‍රණය භාවිතයෙන් රෝග කාරක දිලීර පාලනය කල හැක.',
                       icon: Icons.eco_rounded,
                       accentColor: Color(0xFF388E3C),
                     ),
@@ -774,74 +842,7 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
-  Widget _buildCropCard({
-    required String id,
-    required String name,
-    required String emoji,
-    required String count,
-    required Color color,
-  }) {
-    final bool isSelected = _selectedPlant == id;
 
-    return Expanded(
-      child: GestureDetector(
-        onTap: () {
-          if (_selectedPlant != id) {
-            setState(() {
-              _selectedPlant = id;
-              _selectedImage = null;
-            });
-          }
-        },
-        child: AnimatedContainer(
-          duration: const Duration(milliseconds: 250),
-          padding: const EdgeInsets.symmetric(vertical: 14, horizontal: 8),
-          decoration: BoxDecoration(
-            color: isSelected ? color : Colors.white,
-            borderRadius: BorderRadius.circular(20),
-            border: Border.all(
-              color: isSelected ? color : Colors.grey.shade300,
-              width: isSelected ? 2.2 : 1.2,
-            ),
-            boxShadow: [
-              BoxShadow(
-                color: isSelected
-                    ? color.withValues(alpha: 0.35)
-                    : Colors.black.withValues(alpha: 0.04),
-                blurRadius: isSelected ? 12 : 6,
-                offset: const Offset(0, 4),
-              ),
-            ],
-          ),
-          child: Column(
-            children: [
-              Text(emoji, style: const TextStyle(fontSize: 26)),
-              const SizedBox(height: 6),
-              Text(
-                name,
-                style: TextStyle(
-                  fontSize: 14,
-                  fontWeight: FontWeight.bold,
-                  color: isSelected ? Colors.white : Colors.grey.shade900,
-                ),
-              ),
-              const SizedBox(height: 2),
-              Text(
-                count,
-                style: TextStyle(
-                  fontSize: 11,
-                  fontWeight: FontWeight.w600,
-                  color: isSelected
-                      ? Colors.white.withValues(alpha: 0.9)
-                      : Colors.grey.shade600,
-                ),
-              ),
-            ],
-          ),
-        ),
-      ),
-    );
-  }
 
   void _showInstantAiModal() {
     showModalBottomSheet(
@@ -872,7 +873,11 @@ class _HomeScreenState extends State<HomeScreen> {
                 color: Colors.amber.shade50,
                 shape: BoxShape.circle,
               ),
-              child: Icon(Icons.bolt_rounded, color: Colors.amber.shade900, size: 38),
+              child: Icon(
+                Icons.bolt_rounded,
+                color: Colors.amber.shade900,
+                size: 38,
+              ),
             ),
             const SizedBox(height: 14),
             const Text(
@@ -883,7 +888,11 @@ class _HomeScreenState extends State<HomeScreen> {
             Text(
               'Keras CNN Vision AI මාදිලිය මගින් ශාක පත්‍රයේ ඡායාරූපය පරික්ෂා කර තත්පර 2ක් ඇතුළත රෝගී තත්ත්වය සහ ඊට අදාළ ප්‍රතිකාර හඳුනා ගනී.',
               textAlign: TextAlign.center,
-              style: TextStyle(fontSize: 14, color: Colors.grey.shade700, height: 1.45),
+              style: TextStyle(
+                fontSize: 14,
+                color: Colors.grey.shade700,
+                height: 1.45,
+              ),
             ),
             const SizedBox(height: 22),
             ElevatedButton.icon(
@@ -897,7 +906,9 @@ class _HomeScreenState extends State<HomeScreen> {
                 backgroundColor: const Color(0xFF0F5A29),
                 foregroundColor: Colors.white,
                 minimumSize: const Size(double.infinity, 50),
-                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(16),
+                ),
               ),
             ),
             const SizedBox(height: 10),
@@ -941,7 +952,11 @@ class _HomeScreenState extends State<HomeScreen> {
                     color: Colors.green.shade50,
                     borderRadius: BorderRadius.circular(14),
                   ),
-                  child: Icon(Icons.eco_rounded, color: Colors.green.shade700, size: 28),
+                  child: Icon(
+                    Icons.eco_rounded,
+                    color: Colors.green.shade700,
+                    size: 28,
+                  ),
                 ),
                 const SizedBox(width: 14),
                 const Expanded(
@@ -950,7 +965,10 @@ class _HomeScreenState extends State<HomeScreen> {
                     children: [
                       Text(
                         '🌿 කාබනික විසඳුම් (Organic Remedies)',
-                        style: TextStyle(fontSize: 17, fontWeight: FontWeight.bold),
+                        style: TextStyle(
+                          fontSize: 17,
+                          fontWeight: FontWeight.bold,
+                        ),
                       ),
                       Text(
                         'පරිසර හිතකාමී ස්වාභාවික පලිබෝධ පාලනය',

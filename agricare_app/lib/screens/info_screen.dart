@@ -26,7 +26,6 @@ class InfoScreen extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              // 1. Hero Identity Banner Card
               Container(
                 width: double.infinity,
                 padding: const EdgeInsets.all(24),
@@ -59,7 +58,11 @@ class InfoScreen extends StatelessWidget {
                           ),
                         ],
                       ),
-                      child: const Icon(Icons.eco_rounded, color: Colors.white, size: 56),
+                      child: const Icon(
+                        Icons.eco_rounded,
+                        color: Colors.white,
+                        size: 56,
+                      ),
                     ),
                     const SizedBox(height: 16),
                     const Text(
@@ -73,7 +76,10 @@ class InfoScreen extends StatelessWidget {
                     ),
                     const SizedBox(height: 6),
                     Container(
-                      padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 5),
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 14,
+                        vertical: 5,
+                      ),
                       decoration: BoxDecoration(
                         color: Colors.white.withValues(alpha: 0.25),
                         borderRadius: BorderRadius.circular(16),
@@ -103,7 +109,6 @@ class InfoScreen extends StatelessWidget {
 
               const SizedBox(height: 24),
 
-              // 2. System Diagnostic Badges
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
@@ -130,7 +135,6 @@ class InfoScreen extends StatelessWidget {
 
               const SizedBox(height: 26),
 
-              // 3. Supported Crops Catalog Title
               Text(
                 'සහය දක්වන වගාවන් (Supported Crops)',
                 style: TextStyle(
@@ -151,7 +155,13 @@ class InfoScreen extends StatelessWidget {
                           name: 'තක්කාලි වගාව',
                           diseaseCount: 'රෝග කාණ්ඩ 10ක්',
                           accentColor: primaryEmerald,
-                          diseases: ['Bacterial Spot', 'Early Blight', 'Late Blight', 'Leaf Mold', 'Healthy'],
+                          diseases: [
+                            'Bacterial Spot',
+                            'Early Blight',
+                            'Late Blight',
+                            'Leaf Mold',
+                            'Healthy',
+                          ],
                         ),
                       ),
                       const SizedBox(width: 12),
@@ -161,7 +171,13 @@ class InfoScreen extends StatelessWidget {
                           name: 'මිරිස් වගාව',
                           diseaseCount: 'රෝග කාණ්ඩ 7ක්',
                           accentColor: const Color(0xFFD84315),
-                          diseases: ['Fruit Rot (කරල් කුණුවීම)', 'Leaf Curl', 'Leaf Spot', 'Whitefly', 'Healthy'],
+                          diseases: [
+                            'Fruit Rot (කරල් කුණුවීම)',
+                            'Leaf Curl',
+                            'Leaf Spot',
+                            'Whitefly',
+                            'Healthy',
+                          ],
                         ),
                       ),
                     ],
@@ -172,14 +188,19 @@ class InfoScreen extends StatelessWidget {
                     name: 'වම්බටු වගාව (Brinjal)',
                     diseaseCount: 'රෝග කාණ්ඩ 5ක්',
                     accentColor: const Color(0xFF6A1B9A),
-                    diseases: ['Fruit Cracking (ගෙඩි පිපිරීම)', 'Phomopsis Blight', 'Shoot & Fruit Borer', 'Wet Rot', 'Healthy Fruit'],
+                    diseases: [
+                      'Fruit Cracking (ගෙඩි පිපිරීම)',
+                      'Phomopsis Blight',
+                      'Shoot & Fruit Borer',
+                      'Wet Rot',
+                      'Healthy Fruit',
+                    ],
                   ),
                 ],
               ),
 
               const SizedBox(height: 26),
 
-              // 4. How It Works (පියවරෙන් පියවර)
               _buildSectionCard(
                 icon: Icons.auto_awesome_rounded,
                 title: 'භාවිතා කරන ආකාරය (How It Works)',
@@ -190,19 +211,22 @@ class InfoScreen extends StatelessWidget {
                     _buildStepRow(
                       stepNumber: '1',
                       title: 'වගාව තෝරන්න',
-                      description: 'තක්කාලි (🍅), මිරිස් (🌶️) හෝ වම්බටු (🍆) බෝගය තෝරන්න.',
+                      description:
+                          'තක්කාලි (🍅), මිරිස් (🌶️) හෝ වම්බටු (🍆) බෝගය තෝරන්න.',
                     ),
                     const SizedBox(height: 14),
                     _buildStepRow(
                       stepNumber: '2',
                       title: 'AI විශ්ලේෂණය',
-                      description: 'Keras CNN AI Models මගින් රෝගී තත්ත්වය තත්පර 2කින් හඳුනාගනී.',
+                      description:
+                          'Keras CNN AI Models මගින් රෝගී තත්ත්වය තත්පර 2කින් හඳුනාගනී.',
                     ),
                     const SizedBox(height: 14),
                     _buildStepRow(
                       stepNumber: '3',
                       title: 'උපදෙස් සහ ප්‍රතිකාර',
-                      description: 'සිංහලෙන්ම රෝග ලක්ෂණ, කාබනික සහ රසායනික ප්‍රතිකාර ලබාගන්න.',
+                      description:
+                          'සිංහලෙන්ම රෝග ලක්ෂණ, කාබනික සහ රසායනික ප්‍රතිකාර ලබාගන්න.',
                     ),
                   ],
                 ),
@@ -210,11 +234,14 @@ class InfoScreen extends StatelessWidget {
 
               const SizedBox(height: 28),
 
-              // Footer Copyright Note
               Center(
                 child: Column(
                   children: [
-                    const Icon(Icons.eco_rounded, color: primaryEmerald, size: 32),
+                    const Icon(
+                      Icons.eco_rounded,
+                      color: primaryEmerald,
+                      size: 32,
+                    ),
                     const SizedBox(height: 8),
                     Text(
                       'Agri Care • Smart Agro Sri Lanka',
@@ -275,7 +302,11 @@ class InfoScreen extends StatelessWidget {
           const SizedBox(height: 2),
           Text(
             status,
-            style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold, color: color),
+            style: TextStyle(
+              fontSize: 12,
+              fontWeight: FontWeight.bold,
+              color: color,
+            ),
           ),
         ],
       ),
@@ -349,7 +380,10 @@ class InfoScreen extends StatelessWidget {
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(22),
-        border: Border.all(color: accentColor.withValues(alpha: 0.25), width: 1.4),
+        border: Border.all(
+          color: accentColor.withValues(alpha: 0.25),
+          width: 1.4,
+        ),
         boxShadow: [
           BoxShadow(
             color: accentColor.withValues(alpha: 0.08),

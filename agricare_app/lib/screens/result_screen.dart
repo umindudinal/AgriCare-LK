@@ -19,7 +19,8 @@ class ResultScreen extends StatelessWidget {
     final data = resultData['data'] ?? {};
     final bool hasDetails = data['CommonName_SI'] != null;
 
-    final String aiLabel = data['AI_Label'] ?? data['predicted_class'] ?? 'Unknown';
+    final String aiLabel =
+        data['AI_Label'] ?? data['predicted_class'] ?? 'Unknown';
     final String diseaseTitle = hasDetails ? data['CommonName_SI'] : aiLabel;
     final String symptoms = data['Symptoms_SI'] ?? 'විස්තර ලබාදී නොමැත.';
     final List treatments = data['Treatments'] as List? ?? [];
@@ -35,17 +36,14 @@ class ResultScreen extends StatelessWidget {
       body: SafeArea(
         child: Column(
           children: [
-            // Top Hero Image & Results Header
             Expanded(
               child: SingleChildScrollView(
                 physics: const BouncingScrollPhysics(),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    // Header Image Stack
                     Stack(
                       children: [
-                        // Plant Image Banner
                         Container(
                           width: double.infinity,
                           height: 310,
@@ -63,14 +61,10 @@ class ResultScreen extends StatelessWidget {
                               bottomLeft: Radius.circular(36),
                               bottomRight: Radius.circular(36),
                             ),
-                            child: Image.file(
-                              image,
-                              fit: BoxFit.cover,
-                            ),
+                            child: Image.file(image, fit: BoxFit.cover),
                           ),
                         ),
 
-                        // Shadow Overlay Gradient
                         Positioned.fill(
                           child: Container(
                             decoration: BoxDecoration(
@@ -91,31 +85,40 @@ class ResultScreen extends StatelessWidget {
                           ),
                         ),
 
-                        // Top Action Button (Back)
                         Positioned(
                           top: 16,
                           left: 16,
                           child: CircleAvatar(
-                            backgroundColor: Colors.black.withValues(alpha: 0.5),
+                            backgroundColor: Colors.black.withValues(
+                              alpha: 0.5,
+                            ),
                             radius: 22,
                             child: IconButton(
-                              icon: const Icon(Icons.arrow_back_rounded, color: Colors.white, size: 22),
+                              icon: const Icon(
+                                Icons.arrow_back_rounded,
+                                color: Colors.white,
+                                size: 22,
+                              ),
                               onPressed: () => Navigator.pop(context),
                               tooltip: 'ආපසු',
                             ),
                           ),
                         ),
 
-                        // Status Badge Tag on Top Right
                         Positioned(
                           top: 16,
                           right: 16,
                           child: Container(
-                            padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 7),
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: 14,
+                              vertical: 7,
+                            ),
                             decoration: BoxDecoration(
                               color: isHealthy
                                   ? primaryEmerald
-                                  : (hasDetails ? Colors.amber.shade900 : Colors.red.shade900),
+                                  : (hasDetails
+                                        ? Colors.amber.shade900
+                                        : Colors.red.shade900),
                               borderRadius: BorderRadius.circular(22),
                               boxShadow: [
                                 BoxShadow(
@@ -131,7 +134,9 @@ class ResultScreen extends StatelessWidget {
                                 Icon(
                                   isHealthy
                                       ? Icons.check_circle_rounded
-                                      : (hasDetails ? Icons.warning_amber_rounded : Icons.error_rounded),
+                                      : (hasDetails
+                                            ? Icons.warning_amber_rounded
+                                            : Icons.error_rounded),
                                   color: Colors.white,
                                   size: 17,
                                 ),
@@ -140,7 +145,9 @@ class ResultScreen extends StatelessWidget {
                                   child: Text(
                                     isHealthy
                                         ? 'නිරෝගී ශාකයකි'
-                                        : (hasDetails ? 'රෝගයක් හඳුනාගන්නා ලදී' : 'අවධානය අවශ්‍යයි'),
+                                        : (hasDetails
+                                              ? 'රෝගයක් හඳුනාගන්නා ලදී'
+                                              : 'අවධානය අවශ්‍යයි'),
                                     style: const TextStyle(
                                       color: Colors.white,
                                       fontSize: 12.5,
@@ -154,7 +161,6 @@ class ResultScreen extends StatelessWidget {
                           ),
                         ),
 
-                        // Title Banner Overlay at Bottom of Image
                         Positioned(
                           bottom: 24,
                           left: 20,
@@ -167,9 +173,14 @@ class ResultScreen extends StatelessWidget {
                                 runSpacing: 6,
                                 children: [
                                   Container(
-                                    padding: const EdgeInsets.symmetric(horizontal: 11, vertical: 4),
+                                    padding: const EdgeInsets.symmetric(
+                                      horizontal: 11,
+                                      vertical: 4,
+                                    ),
                                     decoration: BoxDecoration(
-                                      color: Colors.white.withValues(alpha: 0.25),
+                                      color: Colors.white.withValues(
+                                        alpha: 0.25,
+                                      ),
                                       borderRadius: BorderRadius.circular(10),
                                     ),
                                     child: Text(
@@ -183,7 +194,10 @@ class ResultScreen extends StatelessWidget {
                                   ),
                                   if (confidence != null)
                                     Container(
-                                      padding: const EdgeInsets.symmetric(horizontal: 11, vertical: 4),
+                                      padding: const EdgeInsets.symmetric(
+                                        horizontal: 11,
+                                        vertical: 4,
+                                      ),
                                       decoration: BoxDecoration(
                                         color: confidence > 0.8
                                             ? Colors.green.shade600
@@ -191,7 +205,9 @@ class ResultScreen extends StatelessWidget {
                                         borderRadius: BorderRadius.circular(10),
                                         boxShadow: [
                                           BoxShadow(
-                                            color: Colors.black.withValues(alpha: 0.2),
+                                            color: Colors.black.withValues(
+                                              alpha: 0.2,
+                                            ),
                                             blurRadius: 4,
                                           ),
                                         ],
@@ -199,7 +215,11 @@ class ResultScreen extends StatelessWidget {
                                       child: Row(
                                         mainAxisSize: MainAxisSize.min,
                                         children: [
-                                          const Icon(Icons.bolt_rounded, color: Colors.white, size: 14),
+                                          const Icon(
+                                            Icons.bolt_rounded,
+                                            color: Colors.white,
+                                            size: 14,
+                                          ),
                                           const SizedBox(width: 3),
                                           Text(
                                             'නිරවද්‍යතාව: ${(confidence * 100).toStringAsFixed(1)}%',
@@ -239,21 +259,22 @@ class ResultScreen extends StatelessWidget {
 
                     const SizedBox(height: 24),
 
-                    // Content Section
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 18),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           if (hasDetails) ...[
-                            // Symptoms Card Container
                             Container(
                               width: double.infinity,
                               padding: const EdgeInsets.all(22),
                               decoration: BoxDecoration(
                                 color: Colors.white,
                                 borderRadius: BorderRadius.circular(24),
-                                border: Border.all(color: Colors.green.shade200, width: 1.4),
+                                border: Border.all(
+                                  color: Colors.green.shade200,
+                                  width: 1.4,
+                                ),
                                 boxShadow: [
                                   BoxShadow(
                                     color: Colors.black.withValues(alpha: 0.06),
@@ -272,7 +293,9 @@ class ResultScreen extends StatelessWidget {
                                         padding: const EdgeInsets.all(9),
                                         decoration: BoxDecoration(
                                           color: Colors.amber.shade50,
-                                          borderRadius: BorderRadius.circular(14),
+                                          borderRadius: BorderRadius.circular(
+                                            14,
+                                          ),
                                         ),
                                         child: Icon(
                                           Icons.search_rounded,
@@ -309,13 +332,14 @@ class ResultScreen extends StatelessWidget {
 
                             const SizedBox(height: 26),
 
-                            // Treatments Header
                             Row(
                               children: [
                                 Container(
                                   padding: const EdgeInsets.all(8),
                                   decoration: BoxDecoration(
-                                    color: primaryEmerald.withValues(alpha: 0.12),
+                                    color: primaryEmerald.withValues(
+                                      alpha: 0.12,
+                                    ),
                                     shape: BoxShape.circle,
                                   ),
                                   child: const Icon(
@@ -340,7 +364,6 @@ class ResultScreen extends StatelessWidget {
 
                             const SizedBox(height: 16),
 
-                            // Treatment Cards List
                             if (treatments.isNotEmpty) ...[
                               ...treatments.asMap().entries.map((entry) {
                                 final int idx = entry.key;
@@ -354,21 +377,29 @@ class ResultScreen extends StatelessWidget {
                             ] else ...[
                               const Padding(
                                 padding: EdgeInsets.all(12.0),
-                                child: Text('ප්‍රතිකාර තොරතුරු සටහන් වී නොමැත.'),
+                                child: Text(
+                                  'ප්‍රතිකාර තොරතුරු සටහන් වී නොමැත.',
+                                ),
                               ),
                             ],
                           ] else ...[
-                            // Missing details alert card
                             Container(
                               padding: const EdgeInsets.all(22),
                               decoration: BoxDecoration(
                                 color: Colors.orange.shade50,
                                 borderRadius: BorderRadius.circular(24),
-                                border: Border.all(color: Colors.orange.shade300, width: 1.4),
+                                border: Border.all(
+                                  color: Colors.orange.shade300,
+                                  width: 1.4,
+                                ),
                               ),
                               child: Column(
                                 children: [
-                                  Icon(Icons.info_outline_rounded, color: Colors.orange.shade800, size: 52),
+                                  Icon(
+                                    Icons.info_outline_rounded,
+                                    color: Colors.orange.shade800,
+                                    size: 52,
+                                  ),
                                   const SizedBox(height: 14),
                                   Text(
                                     'සිංහල විස්තර ඇතුළත් කර නොමැත',
@@ -402,7 +433,6 @@ class ResultScreen extends StatelessWidget {
               ),
             ),
 
-            // Bottom Fixed Action Bar
             Container(
               padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
               decoration: BoxDecoration(
@@ -426,7 +456,10 @@ class ResultScreen extends StatelessWidget {
                       label: 'තවත් ශාකයක් පරීක්ෂා කරන්න',
                       icon: Icons.camera_alt_rounded,
                       onPressed: () => Navigator.pop(context),
-                      gradientColors: const [Color(0xFF0F5A29), Color(0xFF2E7D32)],
+                      gradientColors: const [
+                        Color(0xFF0F5A29),
+                        Color(0xFF2E7D32),
+                      ],
                     ),
                   ),
                 ],

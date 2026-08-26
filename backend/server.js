@@ -5,7 +5,6 @@ const { spawn } = require('child_process');
 const path = require('path');
 const fs = require('fs');
 
-// mssql වෙනුවට කෙළින්ම msnodesqlv8 පාවිච්චි කිරීම
 const sql = require('msnodesqlv8'); 
 
 const app = express();
@@ -14,7 +13,6 @@ app.use(express.json());
 
 const upload = multer({ dest: 'uploads/' });
 
-// Python වල 100% ක් වැඩ කරපු Connection String එකම මෙතන දෙනවා
 const connectionString = "Driver={ODBC Driver 17 for SQL Server};Server=UMINDU-ACER\\SQLEXPRESS;Database=AgriCareLK_DB;Trusted_Connection=yes;";
 
 app.post('/api/analyze-plant', upload.single('image'), (req, res) => {
@@ -24,17 +22,16 @@ app.post('/api/analyze-plant', upload.single('image'), (req, res) => {
 
     const imagePath = req.file.path;
     
-    // Flutter App එකෙන් එවන ශාක වර්ගය ලබාගැනීම (නැත්නම් පෙරනිමිය ලෙස 'tomato' ගනී)
-    const plantType = req.body.plantType || 'tomato'; 
+    const plantType = req.body.plantType || 'tomato';
 
-    let pythonScriptName = '../predict_api.py'; // තක්කාලි සඳහා පෙරනිමි script එක
+    let pythonScriptName = '../predict_api.py';
     let plantNameLog = 'තක්කාලි';
 
     if (plantType === 'chili') {
-        pythonScriptName = '../predict_chili.py'; // මිරිස් සඳහා
+        pythonScriptName = '../predict_chili.py';
         plantNameLog = 'මිරිස්';
     } else if (plantType === 'brinjal') {
-        pythonScriptName = '../predict_brinjal.py'; // වම්බටු සඳහා
+        pythonScriptName = '../predict_brinjal.py';
         plantNameLog = 'වම්බටු';
     }
 
@@ -53,15 +50,12 @@ app.post('/api/analyze-plant', upload.single('image'), (req, res) => {
     });
 
     pythonProcess.on('close', (code) => {
-        // තාවකාලික ඡායාරූපය මකා දැමීම (මේක කරන එක හොඳයි server එක පිරෙන එක නවත්වන්න)
         try {
             fs.unlinkSync(imagePath);
         } catch (e) {
             console.error("Temporary image delete error:", e);
         }
 
-        // අපි අලුතින් හදපු Python script එකෙන් එන්නේ JSON format එකක්
-        // ඒ නිසා කලින් තිබුණු Regex (match) ක්‍රමය වෙනුවට JSON.parse පාවිච්චි කරනවා
         try {
             const aiResult = JSON.parse(pythonOutput.trim());
 
@@ -75,7 +69,6 @@ app.post('/api/analyze-plant', upload.single('image'), (req, res) => {
             
             console.log("🗄️ Database එකෙන් විස්තර සොයමින් පවතී...");
             
-            // SQL Query එක (මෙහි දත්ත ලබාදීමට '?' භාවිතා කරයි)
             const query = `
                 SELECT d.CommonName_EN, d.CommonName_SI, d.Symptoms_SI, t.TreatmentType, t.Instruction_SI
                 FROM Diseases d
@@ -83,14 +76,12 @@ app.post('/api/analyze-plant', upload.single('image'), (req, res) => {
                 WHERE d.AIModelLabel = ?
             `;
 
-            // කෙළින්ම msnodesqlv8 හරහා Query එක යැවීම (Promises වෙනුවට Callbacks)
             sql.query(connectionString, query, [diseaseName], (err, rows) => {
                 if (err) {
                     console.error("❌ Database දෝෂයක්:", err);
                     return res.status(500).json({ error: 'දත්ත ලබාගැනීමේදී දෝෂයක් ඇතිවිය.' });
                 }
 
-                // දත්ත සාර්ථකව ලැබුණා නම්
                 if (rows && rows.length > 0) {
                     const diseaseDetails = {
                         CommonName_EN: rows[0].CommonName_EN,
@@ -112,7 +103,6 @@ app.post('/api/analyze-plant', upload.single('image'), (req, res) => {
                     console.log("✅ Database දත්ත සාර්ථකව ලබාගත්තා.");
                     res.json({ success: true, data: diseaseDetails });
                 } else {
-                    // Database එකේ දත්ත නැත්නම් default fallback ලබාදීම
                     let fallbackData = null;
                     if (diseaseName === 'Chili_fruit_rot') {
                         fallbackData = {

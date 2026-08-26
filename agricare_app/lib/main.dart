@@ -10,7 +10,6 @@ class AgriCareApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // Primary AgriCare Color Palette
     const primaryEmerald = Color(0xFF0F5A29);
     const secondaryLime = Color(0xFF388E3C);
     const surfaceLight = Color(0xFFF3F7F3);

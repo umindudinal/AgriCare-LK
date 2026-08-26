@@ -2,7 +2,6 @@ import sys
 import os
 import json
 
-# TensorFlow වලින් එන අනවශ්‍ය Warnings පෙන්නන එක නවත්වන්න
 os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3' 
 
 import tensorflow as tf
