@@ -1,0 +1,12 @@
+AgriCare LK Android APK v2.0.0 (Smart Agro AI Edition)
+Package: com.agricare.lk.app
+Target: Android 8.0+
+Framework: Flutter 3.x + TensorFlow MobileNetV2
+Language: Sinhala (100%)
+
+To build the full release APK locally:
+1. Open terminal in agricare_app directory
+2. Run: flutter build apk --release
+3. Find APK at: agricare_app/build/app/outputs/flutter-apk/app-release.apk
+
+AgriCare LK - Empowering Sri Lankan Farmers with AI!

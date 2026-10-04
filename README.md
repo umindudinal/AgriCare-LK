@@ -1,261 +1,319 @@
 # 🌱 AgriCare LK
 
-**AI-powered plant disease detection and treatment guidance for Sri Lankan farmers.**
+**AI-Powered Smart Plant Disease Detection and Agricultural Guidance System for Sri Lankan Farmers — in Sinhala 🇱🇰**
 
-![Dart](https://img.shields.io/badge/Dart-0175C2?style=for-the-badge&logo=dart&logoColor=white)
-![Flutter](https://img.shields.io/badge/Flutter-02569B?style=for-the-badge&logo=flutter&logoColor=white)
-![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black)
-![Node.js](https://img.shields.io/badge/Node.js-339933?style=for-the-badge&logo=node.js&logoColor=white)
-![Express](https://img.shields.io/badge/Express-000000?style=for-the-badge&logo=express&logoColor=white)
-![Python](https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white)
-![TensorFlow](https://img.shields.io/badge/TensorFlow-FF6F00?style=for-the-badge&logo=tensorflow&logoColor=white)
-![OpenCV](https://img.shields.io/badge/OpenCV-5C3EE8?style=for-the-badge&logo=opencv&logoColor=white)
-![SQL Server](https://img.shields.io/badge/SQL_Server-CC2927?style=for-the-badge&logo=microsoftsqlserver&logoColor=white)
-
-AgriCare LK is a full-stack mobile application that helps farmers identify diseases in **Tomato**, **Chili**, and **Brinjal (Eggplant)** crops from a single photo. The app uses trained deep learning models to classify the disease and returns localized (Sinhala) treatment recommendations, symptoms, and agricultural tips sourced from a structured database.
+[![Flutter](https://img.shields.io/badge/Flutter-3.x-02569B?logo=flutter&logoColor=white)](https://flutter.dev)
+[![React](https://img.shields.io/badge/React-18-61DAFB?logo=react&logoColor=black)](https://react.dev/)
+[![Vite](https://img.shields.io/badge/Vite-6.x-646CFF?logo=vite&logoColor=white)](https://vitejs.dev/)
+[![Node.js](https://img.shields.io/badge/Node.js-Express%205-339933?logo=node.js&logoColor=white)](https://nodejs.org)
+[![TensorFlow](https://img.shields.io/badge/TensorFlow-Keras-FF6F00?logo=tensorflow&logoColor=white)](https://www.tensorflow.org)
+[![Supabase](https://img.shields.io/badge/Database-Supabase%20%28PostgreSQL%29-3ECF8E?logo=supabase&logoColor=white)](https://supabase.com)
+[![Platform](https://img.shields.io/badge/Platform-Android%20%7C%20Web%20%7C%20Cloud-informational)]()
 
 ---
 
-## 📖 Table of Contents
+## 📖 Overview
 
-- [Overview](#-overview)
-- [Features](#-features)
-- [System Architecture](#-system-architecture)
-- [Tech Stack](#-tech-stack)
-- [Project Structure](#-project-structure)
-- [Getting Started](#-getting-started)
+Smallholder farmers often lack immediate, affordable access to plant pathology experts when crop diseases strike. **AgriCare LK** solves this critical challenge by providing a complete smart agricultural ecosystem:
+
+1. **Flutter Mobile Application**: An intuitive Android/iOS mobile app with 100% Sinhala-language interface, allowing farmers to take or upload leaf and fruit photos in the field.
+2. **Interactive Web Showcase & Disease Encyclopedia**: A modern React/Vite web application featuring a live AI diagnostic simulator, comprehensive 22-class disease encyclopedia, interactive symptom guides, and direct APK download.
+3. **Deep Learning AI Engines**: Dedicated Convolutional Neural Network (CNN) models trained on Tomato, Chili, and Brinjal (Eggplant) datasets to classify 22 distinct health conditions and diseases.
+4. **Cloud & Fallback Database**: Powered by Supabase Cloud PostgreSQL with automated fallback to localized treatment guidelines (organic and chemical remedies, symptoms, and agricultural prevention tips in Sinhala).
+
+---
+
+## 📑 Table of Contents
+
+- [✨ Features](#-features)
+- [🏗 System Architecture](#-system-architecture)
+- [🛠 Tech Stack](#-tech-stack)
+- [📂 Project Structure](#-project-structure)
+- [🌾 Supported Crops & Diseases](#-supported-crops--diseases)
+- [🚀 Getting Started](#-getting-started)
   - [Prerequisites](#prerequisites)
-  - [1. Backend Setup (Node.js API)](#1-backend-setup-nodejs-api)
-  - [2. Database Setup](#2-database-setup)
-  - [3. AI Model Setup (Python)](#3-ai-model-setup-python)
+  - [1. Backend Setup (Node.js & Supabase)](#1-backend-setup-nodejs--supabase)
+  - [2. Interactive Web Showcase Setup (React + Vite)](#2-interactive-web-showcase-setup-react--vite)
+  - [3. AI Models & Python Setup](#3-ai-models--python-setup)
   - [4. Mobile App Setup (Flutter)](#4-mobile-app-setup-flutter)
-- [API Reference](#-api-reference)
-- [Supported Crops & Diseases](#-supported-crops--diseases)
-- [Roadmap](#-roadmap)
-- [Contributing](#-contributing)
-- [Author](#-author)
-- [License](#-license)
+- [📡 API Reference](#-api-reference)
+- [🗺 Roadmap](#-roadmap)
+- [👤 Author](#-author)
+- [📄 License](#-license)
 
 ---
-
-## 🔍 Overview
-
-Smallholder farmers often lack quick, affordable access to plant pathology expertise. AgriCare LK closes that gap by letting a farmer photograph an affected leaf or fruit and instantly receive:
-
-1. The predicted disease (via an image sent to a trained CNN model)
-2. A confidence score
-3. Localized symptom descriptions and treatment instructions in Sinhala, pulled from a relational database
-
-The system is built as three cooperating components: a **Flutter mobile app** (capture & display), a **Node.js/Express API** (orchestration & data), and **Python/TensorFlow models** (inference).
 
 ## ✨ Features
 
-- 📷 Capture or upload a plant image directly from the mobile app
-- 🧠 Disease classification for **three crop types** — Tomato, Chili, and Brinjal — using dedicated trained models
-- 🇱🇰 Sinhala-language symptoms, treatment instructions, and UI text for accessibility
-- 💊 Treatment recommendations pulled from a normalized SQL Server database (`Diseases` ↔ `Treatments`)
-- 🌾 Agricultural tips presented alongside diagnosis results
-- ⚡ Simple REST API that bridges the mobile client and the Python inference scripts
+- 📷 **Real-time Camera & Gallery Diagnosis**: Instant leaf/fruit disease detection directly from the field.
+- 🧠 **Triple-Crop AI Models**: Custom deep learning models for **Tomato**, **Chili**, and **Brinjal** covering 22 health states and diseases.
+- 🇱🇰 **100% Localized (Sinhala)**: Natural Sinhala language explanations for diseases, symptoms, organic treatments, and chemical solutions.
+- 🌐 **Interactive Web Portal**: Showcase web application with interactive diagnosis demo, disease catalog, dynamic search, filters, and mobile phone mockups.
+- ☁️ **Supabase Cloud Database**: Relational cloud backend storing disease symptoms and structured organic/chemical treatment steps.
+- 🛡️ **Zero-Crash Resilience**: Built-in fallback knowledge base ensuring uninterrupted diagnosis even during offline/database downtime.
+
+---
 
 ## 🏗 System Architecture
 
 ```mermaid
 sequenceDiagram
-    participant U as Flutter App<br/>(agricare_app)
-    participant A as Express API<br/>(backend/server.js)
-    participant P as Python Script<br/>(predict_*.py)
-    participant M as Trained .keras Model<br/>(per crop type)
-    participant D as SQL Server<br/>(Diseases / Treatments)
+    autonumber
+    actor Farmer as 👨‍🌾 Farmer / User
+    participant Mobile as 📱 Flutter App / Web Demo
+    participant API as 🚀 Node.js Express API
+    participant Py as 🐍 Python AI Engine
+    participant Model as 🧠 Keras CNN Models
+    participant Cloud as ☁️ Supabase Cloud DB
 
-    U->>A: POST /api/analyze-plant<br/>(multipart/form-data, image + plantType)
-    A->>P: spawn child process (image path)
-    P->>M: preprocess & predict
-    M-->>P: predicted class + confidence
-    P-->>A: JSON { predicted_class, confidence }
-    A->>D: query symptoms & treatments<br/>WHERE AIModelLabel = predicted_class
-    D-->>A: disease details + treatment plan
-    A-->>U: JSON response (diagnosis + treatment)
-    U-->>U: Show diagnosis on Result Screen
+    Farmer->>Mobile: Capture/upload leaf image & select crop
+    Mobile->>API: POST /api/analyze-plant (multipart/form-data)
+    API->>Py: Spawn child process with image path
+    Py->>Model: Preprocess image & run inference
+    Model-->>Py: Return predicted class & confidence score
+    Py-->>API: JSON { status, predicted_class, confidence }
+    API->>Cloud: Query disease details & treatments (WHERE ai_model_label = class)
+    Cloud-->>API: Return Sinhala symptoms & organic/chemical treatments
+    API-->>Mobile: Combined JSON response
+    Mobile-->>Farmer: Render diagnosis card, confidence meter & treatment plan
 ```
 
-**Flow:**
-1. The user selects a crop type and captures/uploads a leaf or fruit photo in the Flutter app.
-2. The image is sent to the Express API's `/api/analyze-plant` endpoint.
-3. The API spawns the corresponding Python prediction script (`predict_api.py`, `predict_chili.py`, or `predict_brinjal.py`) as a child process.
-4. The Python script loads the relevant `.keras` model, preprocesses the image, and returns the predicted class and confidence as JSON.
-5. The API queries SQL Server for the matching disease's symptoms and treatment plan and returns a combined JSON payload.
-6. The Flutter app renders the diagnosis, symptoms, and treatment on the result screen.
+---
 
 ## 🛠 Tech Stack
 
-| Layer | Technology |
+| Component | Technologies |
 |---|---|
-| Mobile App | **Flutter (Dart)** — `image_picker`, `http`; builds for Android, iOS, Web, Windows, Linux, macOS |
-| Backend API | **Node.js (JavaScript)** — Express 5, Multer, CORS |
-| Machine Learning | **Python** — TensorFlow / Keras, OpenCV, NumPy |
-| Database | **Microsoft SQL Server** (via `mssql` / `msnodesqlv8`) |
-| Model Training | Python, TensorFlow, Google Colab / local GPU |
+| **Mobile App** | **Flutter 3.x (Dart)** — `image_picker`, `http`, responsive custom UI widgets |
+| **Web Showcase** | **React 18, Vite 6, Tailwind CSS / Vanilla CSS** — Lucide icons, responsive layout |
+| **Backend API** | **Node.js, Express 5** — Multer (multipart upload), CORS, Dotenv, `@supabase/supabase-js` |
+| **Database** | **Supabase (Cloud PostgreSQL)** & Local Microsoft SQL Server script support |
+| **Deep Learning** | **Python 3.9+, TensorFlow / Keras, OpenCV, NumPy** |
 
-**Languages used in this repository:** Dart (mobile app UI/logic), JavaScript (backend API), Python (ML training & inference), C++/CMake/Swift/Kotlin/Objective-C/C (auto-generated Flutter platform build files for Windows/Linux/macOS/iOS/Android), HTML (Flutter web build).
+---
 
-## 📁 Project Structure
+## 📂 Project Structure
 
 ```
 AgriCare-LK/
-├── agricare_app/            # Flutter mobile application
+├── agri_care_lk_web_app/      # React + Vite Interactive Web Showcase App
+│   ├── public/                # Static assets, screenshots & disease sample images
+│   ├── src/
+│   │   ├── components/        # Hero, LiveAIDemo, DiseaseEncyclopedia, etc.
+│   │   ├── data/              # Disease information and screenshots catalog
+│   │   ├── App.jsx            # Main showcase app container
+│   │   └── index.css          # Styling & animations
+│   ├── package.json
+│   └── vite.config.js
+│
+├── agricare_app/              # Flutter mobile application
+│   ├── assets/                # App icon and visual assets
 │   ├── lib/
-│   │   ├── main.dart
-│   │   ├── models/           # Data models (e.g. disease_model.dart)
-│   │   ├── screens/          # home_screen, result_screen, info_screen
-│   │   ├── services/         # api_service.dart — HTTP client for the backend
-│   │   └── widgets/          # Reusable UI components
+│   │   ├── models/            # Data models
+│   │   ├── screens/           # Home, Result, and Info screens
+│   │   ├── services/          # HTTP API service client
+│   │   └── widgets/           # UI components
 │   └── pubspec.yaml
-├── backend/                 # Node.js / Express API
-│   ├── server.js             # Main API server, image upload & orchestration
+│
+├── backend/                   # Node.js / Express API server
+│   ├── server.js              # Express API with Supabase integration & child process spawning
+│   ├── .env.example           # Supabase environment variables template
+│   ├── restore_database.js    # Local SQL Server restore helper
 │   └── package.json
-├── predict_api.py           # Tomato disease inference script
-├── predict_chili.py         # Chili disease inference script
-├── predict_brinjal.py       # Brinjal disease inference script
-├── predict_disease.py       # Standalone tomato inference/demo script (matplotlib preview)
-├── train_model.py           # Tomato model training script
-├── train_chili_model.py     # Chili model training script
-├── train_brinjal_model.py   # Brinjal model training script
-├── test_db.py                # Database connectivity test script
+│
+├── predict_api.py             # Inference script for Tomato disease model
+├── predict_chili.py           # Inference script for Chili disease model
+├── predict_brinjal.py         # Inference script for Brinjal disease model
+├── predict_disease.py         # Local visual test script with OpenCV / Matplotlib
+├── train_model.py             # Tomato CNN model training script
+├── train_chili_model.py       # Chili CNN model training script
+├── train_brinjal_model.py     # Brinjal CNN model training script
+├── supabase_setup.sql         # Supabase PostgreSQL schema and seed data (22 diseases)
+├── setup_database.sql         # Local SQL Server schema and seed data
+├── test_supabase.py           # Verification script for Supabase connection
+├── test_db.py                 # Verification script for local SQL Server connection
 └── README.md
 ```
+
+---
+
+## 🌾 Supported Crops & Diseases
+
+The system diagnoses **22 distinct classes** across three major economic crops in Sri Lanka:
+
+| Crop | Class Label | Condition / Disease (English) | නම (සිංහල) |
+|---|---|---|---|
+| 🍅 **Tomato** | `Tomato___Bacterial_spot` | Bacterial Spot | බැක්ටීරියා ලප රෝගය |
+| 🍅 **Tomato** | `Tomato___Early_blight` | Early Blight | අංගමාරය (මුල්) |
+| 🍅 **Tomato** | `Tomato___Late_blight` | Late Blight | පසු අංගමාරය |
+| 🍅 **Tomato** | `Tomato___Leaf_Mold` | Leaf Mold | පත්‍ර පුස් රෝගය |
+| 🍅 **Tomato** | `Tomato___Septoria_leaf_spot` | Septoria Leaf Spot | සෙප්ටෝරියා පත්‍ර ලප |
+| 🍅 **Tomato** | `Tomato___Spider_mites Two-spotted_spider_mite` | Two-Spotted Spider Mite | රතු මයිටා හානිය |
+| 🍅 **Tomato** | `Tomato___Target_Spot` | Target Spot | ඉලක්ක ලප රෝගය |
+| 🍅 **Tomato** | `Tomato___Tomato_Yellow_Leaf_Curl_Virus` | Yellow Leaf Curl Virus | කහ පත්‍ර කොඩවීම |
+| 🍅 **Tomato** | `Tomato___Tomato_mosaic_virus` | Mosaic Virus | මොසයික් වෛරසය |
+| 🍅 **Tomato** | `Tomato___healthy` | Healthy Leaf | නිරෝගී තක්කාලි පත්‍රයක් |
+| 🌶️ **Chili** | `Chili__leaf curl` | Leaf Curl | කොළ කොඩවීම |
+| 🌶️ **Chili** | `Chili__leaf spot` | Leaf Spot | පත්‍ර ලප රෝගය |
+| 🌶️ **Chili** | `Chili__whitefly` | Whitefly Infestation | සුදු මැස්සාගේ හානිය |
+| 🌶️ **Chili** | `Chili__yellowish` | Yellowish Leaf | පත්‍ර කහවීම |
+| 🌶️ **Chili** | `Chili__fruit rot` | Anthracnose / Fruit Rot | කරල් කුණුවීම (ඇන්ත්‍රැක්නෝස්) |
+| 🌶️ **Chili** | `Chili__healthy` | Healthy Leaf | නිරෝගී මිරිස් පත්‍රයක් |
+| 🌶️ **Chili** | `Chili__fruit healthy` | Healthy Fruit | නිරෝගී මිරිස් කරලක් |
+| 🍆 **Brinjal** | `Brinjal_shoot_and_fruit_borer` | Shoot and Fruit Borer | කරටි සහ ගෙඩි විදින පණුවා |
+| 🍆 **Brinjal** | `Brinjal_fruit_cracking` | Fruit Cracking | ගෙඩි පිපිරීමේ රෝගය |
+| 🍆 **Brinjal** | `Brinjal_phomopsis_blight` | Phomopsis Blight | ෆොමොප්සිස් අංගමාරය |
+| 🍆 **Brinjal** | `Brinjal_wet_rot` | Wet Rot (Choanephora) | තෙත කුණුවීමේ රෝගය |
+| 🍆 **Brinjal** | `Brinjal_healthy_fruit` | Healthy Fruit | නිරෝගී වම්බටු ගෙඩියක් |
+
+---
 
 ## 🚀 Getting Started
 
 ### Prerequisites
 
-Make sure the following are installed on your machine:
+- [Node.js](https://nodejs.org/) (v18+) & `npm`
+- [Python 3.9+](https://www.python.org/) with `pip`
+- [Flutter SDK](https://docs.flutter.dev/get-started/install) (v3.12+)
 
-- [Node.js](https://nodejs.org/) (v18+) and npm
-- [Python](https://www.python.org/) 3.9+ with `pip`
-- [Flutter SDK](https://docs.flutter.dev/get-started/install) (3.12+)
-- Microsoft SQL Server (Express edition works) + **ODBC Driver 17 for SQL Server**
-- Python packages: `tensorflow`, `opencv-python`, `numpy`, `matplotlib`
+---
 
-Install the Python dependencies:
+### 1. Backend Setup (Node.js & Supabase)
 
-```bash
-pip install tensorflow opencv-python numpy matplotlib
-```
+1. Navigate to the backend directory and install dependencies:
+   ```bash
+   cd backend
+   npm install
+   ```
 
-### 1. Backend Setup (Node.js API)
+2. Configure your environment variables in `backend/.env`:
+   ```env
+   SUPABASE_URL=https://your-project-ref.supabase.co
+   SUPABASE_ANON_KEY=your-supabase-anon-key
+   PORT=3000
+   ```
 
-```bash
-cd backend
-npm install
-```
+3. Setup the database tables by executing `supabase_setup.sql` in your Supabase SQL Editor.
 
-Update the SQL Server connection string in `server.js` to match your environment:
+4. Start the backend API server:
+   ```bash
+   npm run dev
+   # Server runs on http://localhost:3000
+   ```
 
-```js
-const connectionString = "Driver={ODBC Driver 17 for SQL Server};Server=YOUR_SERVER\\SQLEXPRESS;Database=AgriCareLK_DB;Trusted_Connection=yes;";
-```
+---
 
-Start the API server:
+### 2. Interactive Web Showcase Setup (React + Vite)
 
-```bash
-npm run dev     # with nodemon (auto-reload)
-# or
-npm start
-```
+1. Open a new terminal and navigate to the web app directory:
+   ```bash
+   cd agri_care_lk_web_app
+   npm install
+   ```
 
-The API will run on the port configured in `server.js`.
+2. Start the Vite development server:
+   ```bash
+   npm run dev
+   # Web App opens at http://localhost:5173
+   ```
 
-### 2. Database Setup
+---
 
-Create a SQL Server database named `AgriCareLK_DB` with (at minimum) the following tables:
+### 3. AI Models & Python Setup
 
-- **`Diseases`** — `DiseaseID`, `AIModelLabel`, `CommonName_EN`, `CommonName_SI`, `Symptoms_SI`
-- **`Treatments`** — `DiseaseID` (FK), `TreatmentType`, `Instruction_SI`
+1. Install required Python packages:
+   ```bash
+   pip install tensorflow opencv-python numpy matplotlib
+   ```
 
-The `AIModelLabel` column must match the exact class labels used by the trained models (e.g. `Tomato___Early_blight`, `Chili__leaf spot`, `Brinjal_phomopsis_blight`) so the API can join a prediction to its treatment record.
+2. Train the models or place pre-trained `.keras` files in the root folder:
+   - `tomato_disease_model.keras`
+   - `chili_disease_model.keras`
+   - `brinjal_disease_model.keras`
 
-You can verify your connection using:
+3. Verify Supabase connectivity and AI scripts:
+   ```bash
+   python test_supabase.py
+   ```
 
-```bash
-python test_db.py
-```
-
-### 3. AI Model Setup (Python)
-
-Train each crop's model (or supply your own pre-trained `.keras` files in the project root):
-
-```bash
-python train_model.py            # Tomato model  -> tomato_disease_model.keras
-python train_chili_model.py      # Chili model   -> chili_disease_model.keras
-python train_brinjal_model.py    # Brinjal model -> brinjal_disease_model.keras
-```
-
-> **Note:** Trained model files (`.keras`) are not committed to this repository due to size. Train locally/via Colab or place your model files in the project root before starting the backend.
+---
 
 ### 4. Mobile App Setup (Flutter)
 
-```bash
-cd agricare_app
-flutter pub get
-flutter run
-```
+1. Navigate to the Flutter app directory:
+   ```bash
+   cd agricare_app
+   flutter pub get
+   ```
 
-Point the app's API base URL (in `lib/services/api_service.dart`) to your backend server's address (e.g. `http://<your-local-ip>:<port>/api`).
+2. Update `lib/services/api_service.dart` with your machine's LAN IP or deployed backend URL:
+   ```dart
+   static const String baseUrl = 'http://192.168.1.100:3000/api';
+   ```
+
+3. Run the app on your connected device / emulator:
+   ```bash
+   flutter run
+   ```
+
+---
 
 ## 📡 API Reference
 
 ### `POST /api/analyze-plant`
+Diagnoses an uploaded plant image using the specified crop model.
 
-Analyzes a plant image and returns the predicted disease with treatment details.
+- **URL**: `http://localhost:3000/api/analyze-plant`
+- **Method**: `POST`
+- **Content-Type**: `multipart/form-data`
 
-**Request:** `multipart/form-data`
+**Body:**
+| Key | Type | Description |
+|---|---|---|
+| `image` | File | Crop photo (leaf or fruit) |
+| `plantType` | String | `tomato` \| `chili` \| `brinjal` (default: `tomato`) |
 
-| Field | Type | Required | Description |
-|---|---|---|---|
-| `image` | file | ✅ | Photo of the affected leaf/fruit |
-| `plantType` | string | optional | `tomato` (default) \| `chili` \| `brinjal` |
-
-**Response:** `200 OK`
-
+**Sample Response (`200 OK`):**
 ```json
 {
-  "CommonName_EN": "Early Blight",
-  "CommonName_SI": "...",
-  "Symptoms_SI": "...",
-  "AI_Label": "Tomato___Early_blight",
-  "confidence": 0.94,
-  "treatments": [ { "TreatmentType": "...", "Instruction_SI": "..." } ]
+  "CommonName_EN": "Phomopsis Blight of Brinjal",
+  "CommonName_SI": "වම්බටු ෆොමොප්සිස් අංගමාරය (Phomopsis Blight)",
+  "Symptoms_SI": "පත්‍ර මත දුඹුරු පැහැති වටකුරු ලප ඇතිවීම, ගෙඩි මත ගිලුණු දුඹුරු පැහැති කුණුවීම් ඇතිවීම සහ ශාකය පරවී යාම.",
+  "AI_Label": "Brinjal_phomopsis_blight",
+  "confidence": 0.965,
+  "treatments": [
+    {
+      "treatment_type": "Organic",
+      "instruction_si": "රෝගී පත්‍ර සහ කුණු වූ ගෙඩි වහාම කඩා ඉවත් කර ගිනිතබන්න. බෝග පරිවර්තනය (Crop Rotation) අනුගමනය කරන්න."
+    },
+    {
+      "treatment_type": "Chemical",
+      "instruction_si": "කැප්ටාන් (Captan) හෝ මැන්කොසෙබ් (Mancozeb) දිලීර නාශකය නිර්දේශිත සාන්ද්‍රණයෙන් ස්ප්‍රේ කරන්න."
+    }
+  ]
 }
 ```
 
-**Error responses:** `400` (no image provided), `500` (AI inference or database error).
-
-## 🌾 Supported Crops & Diseases
-
-| Crop | Classes |
-|---|---|
-| **Tomato** | Bacterial Spot, Early Blight, Late Blight, Leaf Mold, Septoria Leaf Spot, Spider Mites, Target Spot, Yellow Leaf Curl Virus, Mosaic Virus, Healthy |
-| **Chili** | Leaf Curl, Leaf Spot, Whitefly, Yellowish, Fruit Rot, Healthy (leaf & fruit) |
-| **Brinjal** | Fruit Cracking, Phomopsis Blight, Shoot & Fruit Borer, Wet Rot, Healthy Fruit |
+---
 
 ## 🗺 Roadmap
 
-- [ ] Package and version trained models via Git LFS or cloud storage
-- [ ] Add offline/on-device inference (TensorFlow Lite) for low-connectivity areas
-- [ ] Expand crop coverage beyond Tomato, Chili, and Brinjal
-- [ ] Add English translations alongside Sinhala content
-- [ ] Deploy the backend API to a cloud host with a managed SQL database
+- [x] Integrate Supabase Cloud Database for real-time treatment updates
+- [x] Launch Interactive Web Showcase & Disease Encyclopedia
+- [ ] Export TensorFlow Lite (`.tflite`) models for fully offline mobile inference
+- [ ] Add voice-assisted diagnosis in Sinhala for enhanced accessibility
+- [ ] Expand disease detection to Paddy (Rice), Coconut, and Tea crops
 
-## 🤝 Contributing
-
-Contributions, issue reports, and feature suggestions are welcome. Please open an issue or submit a pull request.
+---
 
 ## 👤 Author
 
-**Umindu**
-IT Undergraduate, Institute of Technology, University of Moratuwa (ITUM)
+**Umindu Dinal**  
+IT Undergraduate, Institute of Technology, University of Moratuwa (ITUM)  
 GitHub: [@umindudinal](https://github.com/umindudinal)
+
+---
 
 ## 📄 License
 
-This project currently has no license file. Add a `LICENSE` file to define usage terms, or contact the author for permissions.
+This project is developed for educational and agricultural empowerment purposes. All rights reserved.

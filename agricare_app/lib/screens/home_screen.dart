@@ -1,4 +1,4 @@
-import 'dart:io';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import '../services/api_service.dart';
@@ -15,7 +15,8 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  File? _selectedImage;
+  XFile? _selectedImage;
+  Uint8List? _selectedImageBytes;
   final ImagePicker _picker = ImagePicker();
   bool _isLoading = false;
 
@@ -29,14 +30,17 @@ class _HomeScreenState extends State<HomeScreen> {
       );
 
       if (pickedFile != null) {
+        final bytes = await pickedFile.readAsBytes();
         setState(() {
-          _selectedImage = File(pickedFile.path);
+          _selectedImage = pickedFile;
+          _selectedImageBytes = bytes;
           _isLoading = true;
         });
 
         final result = await ApiService.analyzePlant(
-          _selectedImage!,
-          _selectedPlant,
+          imageBytes: bytes,
+          filename: pickedFile.name,
+          plantType: _selectedPlant,
         );
 
         if (!mounted) return;
@@ -49,8 +53,10 @@ class _HomeScreenState extends State<HomeScreen> {
           Navigator.push(
             context,
             MaterialPageRoute(
-              builder: (context) =>
-                  ResultScreen(image: _selectedImage!, resultData: result),
+              builder: (context) => ResultScreen(
+                imageBytes: bytes,
+                resultData: result,
+              ),
             ),
           );
         } else {
@@ -97,6 +103,7 @@ class _HomeScreenState extends State<HomeScreen> {
   void _resetSelection() {
     setState(() {
       _selectedImage = null;
+      _selectedImageBytes = null;
     });
   }
 
@@ -587,9 +594,9 @@ class _HomeScreenState extends State<HomeScreen> {
                   borderRadius: BorderRadius.circular(24),
                   child: Stack(
                     children: [
-                      if (_selectedImage != null) ...[
-                        Image.file(
-                          _selectedImage!,
+                      if (_selectedImageBytes != null) ...[
+                        Image.memory(
+                          _selectedImageBytes!,
                           width: double.infinity,
                           height: double.infinity,
                           fit: BoxFit.cover,

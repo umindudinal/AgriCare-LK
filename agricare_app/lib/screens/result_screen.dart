@@ -1,15 +1,15 @@
-import 'dart:io';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import '../widgets/custom_button.dart';
 import '../widgets/treatment_card.dart';
 
 class ResultScreen extends StatelessWidget {
-  final File image;
+  final Uint8List imageBytes;
   final Map<String, dynamic> resultData;
 
   const ResultScreen({
     super.key,
-    required this.image,
+    required this.imageBytes,
     required this.resultData,
   });
 
@@ -61,7 +61,7 @@ class ResultScreen extends StatelessWidget {
                               bottomLeft: Radius.circular(36),
                               bottomRight: Radius.circular(36),
                             ),
-                            child: Image.file(image, fit: BoxFit.cover),
+                            child: Image.memory(imageBytes, fit: BoxFit.cover),
                           ),
                         ),
 

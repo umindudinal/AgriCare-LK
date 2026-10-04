@@ -1,6 +1,6 @@
 import pyodbc
 
-server = r'UMINDU-ACER\SQLEXPRESS'
+server = r'.\SQLEXPRESS'
 database = 'AgriCareLK_DB'
 
 try:

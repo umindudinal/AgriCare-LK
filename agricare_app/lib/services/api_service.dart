@@ -1,13 +1,21 @@
 import 'dart:convert';
-import 'dart:io';
+import 'package:flutter/foundation.dart';
 import 'package:http/http.dart' as http;
 
 class ApiService {
-  static const String baseUrl = 'http://192.168.8.129:3000/api';
-  static Future<Map<String, dynamic>?> analyzePlant(
-    File imageFile,
-    String plantType,
-  ) async {
+  // Web (Chrome) uses localhost, physical mobile devices use machine LAN IP
+  static String get baseUrl {
+    if (kIsWeb) {
+      return 'http://localhost:3000/api';
+    }
+    return 'http://192.168.43.193:3000/api';
+  }
+
+  static Future<Map<String, dynamic>?> analyzePlant({
+    required Uint8List imageBytes,
+    required String filename,
+    required String plantType,
+  }) async {
     try {
       var request = http.MultipartRequest(
         'POST',
@@ -16,10 +24,14 @@ class ApiService {
       request.fields['plantType'] = plantType;
 
       request.files.add(
-        await http.MultipartFile.fromPath('image', imageFile.path),
+        http.MultipartFile.fromBytes(
+          'image',
+          imageBytes,
+          filename: filename,
+        ),
       );
 
-      print("🚀 $plantType ඡායාරූපය API එක වෙත යවමින් පවතී...");
+      print("🚀 $plantType ඡායාරූපය API එක වෙත යවමින් පවතී ($baseUrl)...");
 
       var streamedResponse = await request.send();
       var response = await http.Response.fromStream(streamedResponse);

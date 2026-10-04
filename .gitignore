@@ -55,9 +55,9 @@ ENV/
 # Datasets (large files/images)
 *_Dataset/
 *_dataset/
-dataset/
-datasets/
-data/
+/dataset/
+/datasets/
+/data/
 
 # Flutter / Dart App
 .dart_tool/
